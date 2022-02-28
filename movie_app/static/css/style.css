@@ -1,0 +1,16 @@
+.flex{
+    display: flex;
+    justify-content: space-evenly;
+}
+a{
+    text-decoration: none;
+}
+textarea{
+    border-radius: 5px;
+}
+button{
+    background-color: #ffc107;
+}
+body{
+    background-image: url('Beauty_Skincare_Neutral_Website.png');
+}

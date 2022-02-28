@@ -1,0 +1,58 @@
+body{
+background-image: url('/static/css/background.png');
+background-color: #3f464d;
+background-size: cover;
+background-repeat: no-repeat;
+height: 100%;
+}
+
+.card{
+margin-bottom: auto;
+width: 290px;
+background-color: rgba(0,0,0,0.5) !important;
+}
+
+.movie_icon span{
+font-size: 50px;
+margin-left: 10px;
+color: #FFC312;
+}
+
+.movie_icon span:hover{
+color: white;
+cursor: pointer;
+}
+
+.card-header h3{
+color: rgb(255, 195, 18);
+}
+
+.movie_icon{
+position: absolute;
+right: 40px;
+top: -30px;
+}
+
+label{
+    color: white;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    margin: 20px 0px;
+}
+
+button {
+    width: 100px;
+    margin-top: 10px;
+}
+
+input{
+    color: white !important;
+    margin-bottom: 10px;
+    width: 220px;
+    background-color:rgb(255, 195, 18,0.3) !important;
+    height: 35px;
+}

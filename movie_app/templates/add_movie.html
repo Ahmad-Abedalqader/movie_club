@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Movie</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/add_movie.css' %}">
+
+</head>
+
+<body>
+    <div class="container-md">
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-6 align-self-center">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Add a movie</h3>
+                        <div class="d-flex justify-content-end movie_icon">
+                            <span><i class="bi bi-plus-lg"></i> <i class="bi bi-film"></i></span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form action="/add_movie" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <label for="title">Movie Title</label>
+                            <input type="text" class="form-control" name="title" id="title">
+
+                            <label for="rel_date">Release Date</label>
+                            <input type="date" class="form-control" name="rel_date" id="rel_date">
+
+                            <label for="desc">Description</label>
+                            <textarea class="form-control" name="desc" id="desc" rows="5"></textarea>
+
+                            <label for="trailer_url">Add url of the Youtube trailer</label>
+                            <input type="url" class="form-control" name="trailer_url" id="trailer_url">
+                            
+                            <label class="form-check-label" for="cat">Categories belong to the movie</label>
+                            <div class="form-check form-check-inline" id="cat">
+                                <input class="form-check-input" type="checkbox" name="categ" id="inlineCheckbox1" value="romantic">
+                                <label class="form-check-label" for="inlineCheckbox1">Romantic</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="categ" id="inlineCheckbox2" value="drama">
+                                <label class="form-check-label" for="inlineCheckbox2">Drama</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="categ" id="inlineCheckbox3" value="comedy">
+                                <label class="form-check-label" for="inlineCheckbox3">Comedy</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="categ" id="inlineCheckbox4" value="thriller">
+                                <label class="form-check-label" for="inlineCheckbox4">Thriller</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="categ" id="inlineCheckbox5" value="fantasy">
+                                <label class="form-check-label" for="inlineCheckbox5">Fantasy</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="categ" id="inlineCheckbox6" value="action">
+                                <label class="form-check-label" for="inlineCheckbox6">Action</label>
+                            </div>
+
+                            <label for="title">upload picture</label>
+                            <input type="file" class="form-control" name="image" id="title">
+                            
+                            <button type="submit" class="btn btn-warning btn-sm">Add movie</button>
+                            
+                        </form>
+                    </div>
+                </div>
+                {% if messages %}
+                <div class="alert alert-danger alert-dismissible fade show" style="width: 280px;">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

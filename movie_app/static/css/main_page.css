@@ -1,0 +1,80 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body,html{
+    background-image: url("/static/css/Beauty_Skincare_Neutral_Website.png");
+    background-color: gray;
+}
+header a{
+    width: 100px;
+    font-size: 18px;
+    text-decoration: none;
+}
+.a{
+    color: #ffc107;
+}
+.main_container{
+    background-image: url("/static/css/Beauty_Skincare_Neutral_Website.png");
+    background-color: gray;
+}
+.slid_container{
+    background-color: #212529; 
+}
+.carousel-item img{
+    height: 300px;
+    width: 300px;
+
+}
+/* img{
+    height: 300px;
+    width: 300px;
+
+} */
+.carousel-item{
+    height: inherit;
+}
+.carousel-inner{
+    display: flex;
+    justify-content: center;
+    height: inherit;
+}
+.carousel-item {
+    position: relative;
+    height: inherit;
+}
+.card{
+    position: absolute;
+    right: 35%;
+    /* width: 40%; */
+    top: 10%;
+    /* height: inherit; */
+}
+.main_container{
+    /* display: flex; */
+    height: auto;
+    /* background-image: url("../img/puddle_jumper_octodex.jpg"); */
+
+}
+.sid_bar{
+    /* flex: 3; */
+    background-image: url("static/css/Beauty_Skincare_Neutral_Website.png");
+    margin-top: 10px;
+    opacity: 0.88;
+}
+.slid_container{
+    /* flex: 6; */
+    height: 500px;
+    opacity: 0.9;
+}
+.card-text1{
+    height: 110px;
+    overflow-y:scroll;
+}
+iframe{
+    max-width: 180px;
+    overflow-x: scroll;
+
+}
+
+

@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'css/movie.css' %}">
+    <script src="{% static 'javascript/movie.js' %}"></script>
+
+    
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+
+    <style>
+        input.radio{
+        color: #ffc107;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <img src='../static/img/project_logo1.png' height="45" alt="movie_logo">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon" style="color: white;"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a href="/" class="btn outline-dark btn-sm ms-3" style="color: #ffc107; font-size:16px;">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/about_us" class="btn outline-dark btn-sm ms-3" style="color: #ffc107; font-size:16px;">About us</a>
+                        </li>
+                    </ul>
+                    {% if 'from' in request.session %}
+                    <div class="nav-item">
+                        <a href="/adding_form" class="btn outline-warning btn-sm ms-3"
+                        style="color: #ffc107; font-size:16px;">Add Movie</a>
+                    </div>
+                    <div class="nav-item">
+                        <a href="#" class="btn outline-warning btn-sm ms-3" style="color: #ffc107; font-size:16px;">{{this_user.first_name}}</a>
+                    </div>
+                    <div class="nav-item">
+                        <a href="/logout" class="btn outline-warning btn-sm ms-3"
+                        style="color: #ffc107; font-size:16px;">Log out</a>
+                    </div>
+                    {% else %}
+                    <div class="nav-item">
+                        <a href="/login_form" class="btn outline-warning btn-sm ms-3"
+                        style="color: #ffc107; font-size:16px;">Login</a>
+                    </div>
+                    <div class="nav-item">
+                        <a href="/login_form" class="btn btn-warning btn-sm" style="font-size:16px;">Sign Up</a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </header>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: lightgray; box-shadow:2px 2px 2px black;">
+        <div class="container-fluid">
+            <img src='../static/img/project_logo1.png' height="30" alt="movie_logo">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                {% if 'from' in request.session %}
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/" style="color: black; font-size:16px;">Movies</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/watch_list" style="color: black; font-size:16px;">Watch List</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/favorite" style="color: black; font-size:16px;">Favorites</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            style="color: black;font-size:16px">
+                            categories
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="/category/action">Action</a></li>
+                            <li><a class="dropdown-item" href="/category/drama">Drama</a></li>
+                            <li><a class="dropdown-item" href="/category/comedy">Comedy</a></li>
+                            <li><a class="dropdown-item" href="/category/romantic">Romantic</a></li>
+                            <li><a class="dropdown-item" href="/category/thriller">Thriller</a></li>
+                            <li><a class="dropdown-item" href="/category/fantasy">Fantasy</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link ms-4" href="/my_movies" style="color: black; font-size:16px;">My Movies</a>
+                    </li>
+                </ul>
+                <form class="d-flex" action="/movies/search" method="post">
+                    {% csrf_token %}
+                    <input class="form-control mr-sm-2 mx-2" type="search" placeholder="Search" aria-label="Search"
+                        name="search" id="movie_title" style="height: 30px;">
+                    <button class="btn btn-outline-warning my-2 my-sm-0 btn-sm" type="submit"
+                        style="color:black;">Search</button>
+                </form>
+                {% else %}
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/" style="color: black; font-size:16px;">Movies</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/login_form" style="color: black; font-size:16px;">Watch List</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/login_form" style="color: black; font-size:16px;">Favorites</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        style="color: black;font-size:16px">
+                        categories
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/category/action">Action</a></li>
+                        <li><a class="dropdown-item" href="/category/drama">Drama</a></li>
+                        <li><a class="dropdown-item" href="/category/comedy">Comedy</a></li>
+                        <li><a class="dropdown-item" href="/category/romantic">Romantic</a></li>
+                        <li><a class="dropdown-item" href="/category/thriller">Thriller</a></li>
+                        <li><a class="dropdown-item" href="/category/fantasy">Fantasy</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link ms-4" href="/login_form" style="color: black; font-size:16px;">My Movies</a>
+                </li>
+            </ul>
+            <form class="d-flex" action="/movies/search" method="post">
+                {% csrf_token %}
+                <input class="form-control mr-sm-2 mx-2" type="search" placeholder="Search" aria-label="Search"
+                    name="search" id="movie_title" style="height: 30px;">
+                <button class="btn btn-outline-warning my-2 my-sm-0 btn-sm" type="submit"
+                    style="color:black;">Search</button>
+            </form>
+            {% endif %}
+            </div>
+        </div>
+    </nav>
+
+        <div class="card" style="margin-top: 0px;">
+            <div class="card-body ">
+                <div class="card mb-3 " style=" max-height: 600px;">
+                    <div class="row col-12">
+                        <div class="col-7">
+                            <iframe class="col-12" height="300" src="{{this_movie.trailer_url}}" title="YouTube video player" frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <div class="card-body col-4 text-center">
+                            <h5 class="card-title">{{this_movie.title}}</h5>
+                            <p class="card-text">{{this_movie.desc}}</p>
+                            {% if this_movie in this_user.movies_to_watch.all %}
+                            <a href="/remove_from_watchlist/{{this_movie.id}}"><button type="submit" class="btn btn-warning">Remove form watch list</a></button> 
+                            {% else %}
+                            <a href="/add_to_watchlist/{{this_movie.id}}"><button type="submit" class="btn btn-warning">Add to watch list</a></button>
+                            {% endif %}
+                            {% if this_movie in this_user.favorites.all %}
+                            <a href="/remove_from_favorites/{{this_movie.id}}"><button type="submit" class="btn btn-warning">Remove form favorites</a></button> 
+                            {% else %}
+                            <a href="/add_to_favorites/{{this_movie.id}}"><button type="submit" class="btn btn-warning">Add to favorites</a></button>
+                            {% endif %}
+                            {% if 'from' in request.session %}
+                            <div class="row align-items-center justify-content-center px-5 py-2">
+                                <form action="/rate/{{this_movie.id}}" method="post">
+                                    <div class="rank ">
+                                    <button type="submit" class="btn btn-warning">Rank</button>
+                                    <span style="font-size: 15px; font-weight: bold;">{{avg}}<span class="fa fa-star" style="color: #ffc107;"></span></span>
+                                    </div>
+                                    {% csrf_token %}
+                                    <label for="customRange3" class="form-label"></label><br><br>
+                                    <div class="input">
+                                    <p class="col-1">1</p>
+                                    <input type="range" class="form-range col-9" min="0" max="10" step="1" name="range" id="customRange3">
+                                    <p class="col-1">10</p>
+                                    </div>
+                                </form>
+                                {% endif %}
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="comment" style="border-top: 1px solid black;">
+                    <form  action="/comment/{{this_movie.id}}" method="post">
+                        {% csrf_token %}
+                        <textarea class="col-7" style="margin-top: 3px;" name="comment" id="" cols="30" rows="3" placeholder="add a comment"></textarea>
+                        <div class="col-7"style="text-align: end;"><button type="submit" class="btn btn-warning ">Comment</button></div>
+                    </form>
+                    <ul style="list-style: none;">
+                        {% for comment in comments %}
+                        <div style="border-bottom: 1px solid black;"><li>- {{comment.user.first_name}} {{comment.user.last_name}} -{{comment.created_at}}</li>
+                        <li style="padding-bottom: 10px;"><span style="padding: 5px; padding-left: 5px;">{{comment.comment}}</span></li></div>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+            
+    <!-- jquery autocomplete for the search box -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+    <script>
+    $( function() {
+        $( "#movie_title" ).autocomplete({
+        source: '{% url "search_result" %}'
+        });
+    } );
+    </script>
+    
+</body>
+
+</html>
